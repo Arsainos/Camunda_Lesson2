@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1h6ugad" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="Collaboration_0by6m2k">
+    <bpmn:participant id="FoodSelectorAppParticipant" name="Food Selector App" processRef="FoodSelectorAppProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="FoodSelectorAppProcess" name="Food Selector App" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0xqsu6s</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0xqsu6s" sourceRef="StartEvent_1" targetRef="FoodSelectorTask" />
+    <bpmn:sequenceFlow id="Flow_0izp3mj" sourceRef="FoodSelectorTask" targetRef="GetReceiptInfoTask" />
+    <bpmn:sequenceFlow id="Flow_11pkddm" sourceRef="GetReceiptInfoTask" targetRef="FoodSelectorResultsTask" />
+    <bpmn:sequenceFlow id="Flow_0q1ov0v" sourceRef="FoodSelectorResultsTask" targetRef="DrinkTeaTask" />
+    <bpmn:userTask id="FoodSelectorTask" name="Food Selector">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="FoodSelector" label="Выберите еду для готовки" type="enum">
+            <camunda:value id="Soup" name="Soup" />
+            <camunda:value id="Pancake" name="Pancake" />
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0xqsu6s</bpmn:incoming>
+      <bpmn:outgoing>Flow_0izp3mj</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="GetReceiptInfoTask" name="Get Receipt Info" camunda:type="external" camunda:topic="CookingReceipts">
+      <bpmn:incoming>Flow_0izp3mj</bpmn:incoming>
+      <bpmn:outgoing>Flow_11pkddm</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_174y31c" sourceRef="DrinkTeaTask" targetRef="TeaDrinkResultTask" />
+    <bpmn:endEvent id="Event_0164wp6">
+      <bpmn:incoming>Flow_1192htx</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1192htx" sourceRef="TeaDrinkResultTask" targetRef="Event_0164wp6" />
+    <bpmn:userTask id="FoodSelectorResultsTask" name="Food Selector Results">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="FoodResult" label="Рецепты" type="string" defaultValue="${Receipts}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_11pkddm</bpmn:incoming>
+      <bpmn:outgoing>Flow_0q1ov0v</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="DrinkTeaTask" name="Drink Tea" camunda:type="external" camunda:topic="DrinkTea">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="TeaType">Earl Grey</camunda:inputParameter>
+          <camunda:outputParameter name="TeaDrunk">${Drunk == "Yes"}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0q1ov0v</bpmn:incoming>
+      <bpmn:outgoing>Flow_174y31c</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="TeaDrinkResultTask" name="Tea Drink Result">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="EmptyCupOfTea" type="boolean" defaultValue="${TeaDrunk}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_174y31c</bpmn:incoming>
+      <bpmn:outgoing>Flow_1192htx</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmn:error id="Error_0b0hzpk" name="NO_FOOD_SELECTOR" errorCode="NO_FOOD_SELECTOR" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0by6m2k">
+      <bpmndi:BPMNShape id="Participant_1873ezn_di" bpmnElement="FoodSelectorAppParticipant" isHorizontal="true">
+        <dc:Bounds x="129" y="120" width="1139" height="270" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0xqsu6s_di" bpmnElement="Flow_0xqsu6s">
+        <di:waypoint x="258" y="250" />
+        <di:waypoint x="310" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0izp3mj_di" bpmnElement="Flow_0izp3mj">
+        <di:waypoint x="410" y="250" />
+        <di:waypoint x="470" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11pkddm_di" bpmnElement="Flow_11pkddm">
+        <di:waypoint x="570" y="250" />
+        <di:waypoint x="630" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0q1ov0v_di" bpmnElement="Flow_0q1ov0v">
+        <di:waypoint x="730" y="250" />
+        <di:waypoint x="790" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_174y31c_di" bpmnElement="Flow_174y31c">
+        <di:waypoint x="890" y="250" />
+        <di:waypoint x="960" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1192htx_di" bpmnElement="Flow_1192htx">
+        <di:waypoint x="1060" y="250" />
+        <di:waypoint x="1132" y="250" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="222" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1adlu8p_di" bpmnElement="FoodSelectorTask">
+        <dc:Bounds x="310" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00co287_di" bpmnElement="GetReceiptInfoTask">
+        <dc:Bounds x="470" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0164wp6_di" bpmnElement="Event_0164wp6">
+        <dc:Bounds x="1132" y="232" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0iiiya6_di" bpmnElement="FoodSelectorResultsTask">
+        <dc:Bounds x="630" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1yafdb1_di" bpmnElement="DrinkTeaTask">
+        <dc:Bounds x="790" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0lr0035_di" bpmnElement="TeaDrinkResultTask">
+        <dc:Bounds x="960" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
