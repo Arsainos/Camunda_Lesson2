@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0lejpra" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="Collaboration_0m7x24x">
+    <bpmn:participant id="AskTimParticipant" name="Ask Tim" processRef="AskTimProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="AskTimProcess" name="Ask Tim" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1wfiwb8</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_175x1v3">
+      <bpmn:incoming>Flow_0c02kev</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1wfiwb8" sourceRef="StartEvent_1" targetRef="AskTimTask" />
+    <bpmn:sequenceFlow id="Flow_1ynpu3s" sourceRef="AskTimTask" targetRef="TimAskedTask" />
+    <bpmn:sequenceFlow id="Flow_0c02kev" sourceRef="TimAskedTask" targetRef="Event_175x1v3" />
+    <bpmn:serviceTask id="AskTimTask" name="Ask Tim" camunda:type="external" camunda:topic="AskTim">
+      <bpmn:incoming>Flow_1wfiwb8</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ynpu3s</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="TimAskedTask" name="Tim Asked">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Result" label="Ответ" type="string" defaultValue="${Answer}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ynpu3s</bpmn:incoming>
+      <bpmn:outgoing>Flow_0c02kev</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0m7x24x">
+      <bpmndi:BPMNShape id="Participant_0gu4h1l_di" bpmnElement="AskTimParticipant" isHorizontal="true">
+        <dc:Bounds x="129" y="52" width="600" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1wfiwb8_di" bpmnElement="Flow_1wfiwb8">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ynpu3s_di" bpmnElement="Flow_1ynpu3s">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="430" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0c02kev_di" bpmnElement="Flow_0c02kev">
+        <di:waypoint x="530" y="177" />
+        <di:waypoint x="592" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_175x1v3_di" bpmnElement="Event_175x1v3">
+        <dc:Bounds x="592" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09jwwm4_di" bpmnElement="AskTimTask">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ftlvi5_di" bpmnElement="TimAskedTask">
+        <dc:Bounds x="430" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

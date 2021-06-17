@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0rkh3u6" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="Collaboration_0t2em5q">
+    <bpmn:participant id="AskTomParticipant" name="Ask Tom" processRef="AskTomProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="AskTomProcess" name="Ask Tom" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_0eu7mda" sourceRef="StartEvent_1" targetRef="AskTomTask" />
+    <bpmn:sequenceFlow id="Flow_0m67s0q" sourceRef="AskTomTask" targetRef="TomAskedTask" />
+    <bpmn:sequenceFlow id="Flow_123yrz8" sourceRef="TomAskedTask" targetRef="Event_07hes29" />
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0eu7mda</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_07hes29">
+      <bpmn:incoming>Flow_123yrz8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="AskTomTask" name="Ask Tom" camunda:type="external" camunda:topic="AskTom">
+      <bpmn:incoming>Flow_0eu7mda</bpmn:incoming>
+      <bpmn:outgoing>Flow_0m67s0q</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="TomAskedTask" name="Tom Asked">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Result" label="Ответ" type="string" defaultValue="${Answer}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0m67s0q</bpmn:incoming>
+      <bpmn:outgoing>Flow_123yrz8</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0t2em5q">
+      <bpmndi:BPMNShape id="Participant_1ko0cnn_di" bpmnElement="AskTomParticipant" isHorizontal="true">
+        <dc:Bounds x="129" y="117" width="600" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0eu7mda_di" bpmnElement="Flow_0eu7mda">
+        <di:waypoint x="228" y="240" />
+        <di:waypoint x="310" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0m67s0q_di" bpmnElement="Flow_0m67s0q">
+        <di:waypoint x="410" y="240" />
+        <di:waypoint x="470" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_123yrz8_di" bpmnElement="Flow_123yrz8">
+        <di:waypoint x="570" y="240" />
+        <di:waypoint x="632" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_07hes29_di" bpmnElement="Event_07hes29">
+        <dc:Bounds x="632" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hu3ty9_di" bpmnElement="AskTomTask">
+        <dc:Bounds x="310" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_13sgo0l_di" bpmnElement="TomAskedTask">
+        <dc:Bounds x="470" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
