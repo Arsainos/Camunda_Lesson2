@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda_Lesson2_Example2", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda_Lesson2_Example3", "Camunda_Lesson2_Example3\Camunda_Lesson2_Example3.csproj", "{1E366EBB-1219-40C6-953F-B7109B9071A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda_Lesson2_Example4", "Camunda_Lesson2_Example4\Camunda_Lesson2_Example4.csproj", "{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1E366EBB-1219-40C6-953F-B7109B9071A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E366EBB-1219-40C6-953F-B7109B9071A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E366EBB-1219-40C6-953F-B7109B9071A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
