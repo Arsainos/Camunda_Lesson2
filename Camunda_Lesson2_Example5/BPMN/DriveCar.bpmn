@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0pod29u" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="Collaboration_12u8p34">
+    <bpmn:participant id="DrivingCarParticipant" name="Driving Car" processRef="DriveCarProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="DriveCarProcess" name="Drive Car" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0g6ycus</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1rle7k0">
+      <bpmn:incoming>Flow_0dd1d7n</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="Event_1hp1dxk">
+      <bpmn:incoming>Flow_1om5yp9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="DriveCarTask" name="Drive Car" camunda:type="external" camunda:topic="DriveCar">
+      <bpmn:incoming>Flow_0g6ycus</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dd1d7n</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="CARERRORTask" name="CAR ERROR">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Result" label="Ошиька" type="string" defaultValue="${CAR_ERROR_MESSAGE}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ngt3ud</bpmn:incoming>
+      <bpmn:outgoing>Flow_1om5yp9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="CAR_ERRORBoundaryEvent" name="CAR_ERROR" attachedToRef="DriveCarTask">
+      <bpmn:outgoing>Flow_1ngt3ud</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1cc6d7z" errorRef="Error_0kc670r" camunda:errorMessageVariable="CAR_ERROR_MESSAGE" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_0g6ycus" sourceRef="StartEvent_1" targetRef="DriveCarTask" />
+    <bpmn:sequenceFlow id="Flow_0dd1d7n" sourceRef="DriveCarTask" targetRef="Event_1rle7k0" />
+    <bpmn:sequenceFlow id="Flow_1ngt3ud" sourceRef="CAR_ERRORBoundaryEvent" targetRef="CARERRORTask" />
+    <bpmn:sequenceFlow id="Flow_1om5yp9" sourceRef="CARERRORTask" targetRef="Event_1hp1dxk" />
+  </bpmn:process>
+  <bpmn:error id="Error_0kc670r" name="Error_13017g3" errorCode="CAR_ERROR" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_12u8p34">
+      <bpmndi:BPMNShape id="Participant_0cmsec6_di" bpmnElement="DrivingCarParticipant" isHorizontal="true">
+        <dc:Bounds x="129" y="79" width="600" height="331" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0g6ycus_di" bpmnElement="Flow_0g6ycus">
+        <di:waypoint x="258" y="190" />
+        <di:waypoint x="310" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dd1d7n_di" bpmnElement="Flow_0dd1d7n">
+        <di:waypoint x="410" y="190" />
+        <di:waypoint x="462" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ngt3ud_di" bpmnElement="Flow_1ngt3ud">
+        <di:waypoint x="410" y="248" />
+        <di:waypoint x="410" y="310" />
+        <di:waypoint x="480" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1om5yp9_di" bpmnElement="Flow_1om5yp9">
+        <di:waypoint x="580" y="310" />
+        <di:waypoint x="632" y="310" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="222" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rle7k0_di" bpmnElement="Event_1rle7k0">
+        <dc:Bounds x="462" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hp1dxk_di" bpmnElement="Event_1hp1dxk">
+        <dc:Bounds x="632" y="292" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ulu00x_di" bpmnElement="DriveCarTask">
+        <dc:Bounds x="310" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ebnad5_di" bpmnElement="CARERRORTask">
+        <dc:Bounds x="480" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1j8tldx_di" bpmnElement="CAR_ERRORBoundaryEvent">
+        <dc:Bounds x="392" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="448" y="220" width="71" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

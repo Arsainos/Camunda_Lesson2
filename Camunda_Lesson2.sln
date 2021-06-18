@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda_Lesson2_Example1", "Camunda_Lesson2_Example1\Camunda_Lesson2_Example1.csproj", "{08E66264-A306-44AC-BE4F-5C986F534B66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camunda_Lesson2_Example1", "Camunda_Lesson2_Example1\Camunda_Lesson2_Example1.csproj", "{08E66264-A306-44AC-BE4F-5C986F534B66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda_Lesson2_Example2", "Camunda_Lesson2_Example2\Camunda_Lesson2_Example2.csproj", "{D459A625-2A50-4112-B099-3D0742EC6505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camunda_Lesson2_Example2", "Camunda_Lesson2_Example2\Camunda_Lesson2_Example2.csproj", "{D459A625-2A50-4112-B099-3D0742EC6505}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda_Lesson2_Example3", "Camunda_Lesson2_Example3\Camunda_Lesson2_Example3.csproj", "{1E366EBB-1219-40C6-953F-B7109B9071A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camunda_Lesson2_Example3", "Camunda_Lesson2_Example3\Camunda_Lesson2_Example3.csproj", "{1E366EBB-1219-40C6-953F-B7109B9071A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda_Lesson2_Example4", "Camunda_Lesson2_Example4\Camunda_Lesson2_Example4.csproj", "{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Camunda_Lesson2_Example4", "Camunda_Lesson2_Example4\Camunda_Lesson2_Example4.csproj", "{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Camunda_Lesson2_Example5", "Camunda_Lesson2_Example5\Camunda_Lesson2_Example5.csproj", "{363F1381-3E73-49A0-8545-BBE79858CFDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5CA5F03-2AB7-43D7-AC1A-C39C557E66D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363F1381-3E73-49A0-8545-BBE79858CFDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363F1381-3E73-49A0-8545-BBE79858CFDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363F1381-3E73-49A0-8545-BBE79858CFDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363F1381-3E73-49A0-8545-BBE79858CFDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
