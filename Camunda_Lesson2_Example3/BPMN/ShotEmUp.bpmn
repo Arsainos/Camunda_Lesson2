@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1jmms15" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.6.0">
+  <bpmn:collaboration id="Collaboration_1llewx7">
+    <bpmn:participant id="ShotEmUpParticipant" name="Shot Em Up" processRef="ShotEmUpProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="ShotEmUpProcess" name="Shot Em Up" isExecutable="true" camunda:versionTag="Shot Em Up ver1.0">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0gpaz4x</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_01i5anv">
+      <bpmn:incoming>Flow_0t4nnv1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="StrafeTask" name="Strafe" camunda:asyncBefore="true" camunda:exclusive="false" camunda:type="external" camunda:topic="Strafe">
+      <bpmn:incoming>Flow_0y5gzx3</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fic0ix</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ShootTask" name="Shoot" camunda:asyncBefore="true" camunda:exclusive="false" camunda:type="external" camunda:topic="Shoot">
+      <bpmn:incoming>Flow_0g5hum2</bpmn:incoming>
+      <bpmn:outgoing>Flow_002vybt</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:parallelGateway id="Gateway_0gwsn9f">
+      <bpmn:incoming>Flow_0gpaz4x</bpmn:incoming>
+      <bpmn:outgoing>Flow_0y5gzx3</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0g5hum2</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:parallelGateway id="Gateway_0wfkflq">
+      <bpmn:incoming>Flow_1fic0ix</bpmn:incoming>
+      <bpmn:incoming>Flow_002vybt</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n2i01a</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:userTask id="EnemyIsKilledTask" name="Enemy is killed">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Strafe" label="Стрейфанул" type="boolean" defaultValue="${Strafed}" />
+          <camunda:formField id="Shoot" label="Расстрелян" type="boolean" defaultValue="${Shooted}" />
+          <camunda:formField id="Killed" label="Убит" type="boolean" defaultValue="${Strafed &#38;&#38; Shooted}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1n2i01a</bpmn:incoming>
+      <bpmn:outgoing>Flow_0t4nnv1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0gpaz4x" sourceRef="StartEvent_1" targetRef="Gateway_0gwsn9f" />
+    <bpmn:sequenceFlow id="Flow_0y5gzx3" sourceRef="Gateway_0gwsn9f" targetRef="StrafeTask" />
+    <bpmn:sequenceFlow id="Flow_0g5hum2" sourceRef="Gateway_0gwsn9f" targetRef="ShootTask" />
+    <bpmn:sequenceFlow id="Flow_1fic0ix" sourceRef="StrafeTask" targetRef="Gateway_0wfkflq" />
+    <bpmn:sequenceFlow id="Flow_002vybt" sourceRef="ShootTask" targetRef="Gateway_0wfkflq" />
+    <bpmn:sequenceFlow id="Flow_1n2i01a" sourceRef="Gateway_0wfkflq" targetRef="EnemyIsKilledTask" />
+    <bpmn:sequenceFlow id="Flow_0t4nnv1" sourceRef="EnemyIsKilledTask" targetRef="Event_01i5anv" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1llewx7">
+      <bpmndi:BPMNShape id="Participant_0w1vyuy_di" bpmnElement="ShotEmUpParticipant" isHorizontal="true">
+        <dc:Bounds x="129" y="117" width="720" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0gpaz4x_di" bpmnElement="Flow_0gpaz4x">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="265" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0y5gzx3_di" bpmnElement="Flow_0y5gzx3">
+        <di:waypoint x="315" y="177" />
+        <di:waypoint x="370" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g5hum2_di" bpmnElement="Flow_0g5hum2">
+        <di:waypoint x="290" y="202" />
+        <di:waypoint x="290" y="290" />
+        <di:waypoint x="370" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fic0ix_di" bpmnElement="Flow_1fic0ix">
+        <di:waypoint x="470" y="177" />
+        <di:waypoint x="525" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_002vybt_di" bpmnElement="Flow_002vybt">
+        <di:waypoint x="470" y="290" />
+        <di:waypoint x="550" y="290" />
+        <di:waypoint x="550" y="202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n2i01a_di" bpmnElement="Flow_1n2i01a">
+        <di:waypoint x="575" y="177" />
+        <di:waypoint x="630" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0t4nnv1_di" bpmnElement="Flow_0t4nnv1">
+        <di:waypoint x="730" y="177" />
+        <di:waypoint x="792" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01i5anv_di" bpmnElement="Event_01i5anv">
+        <dc:Bounds x="792" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0836rp7_di" bpmnElement="StrafeTask">
+        <dc:Bounds x="370" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0h78dap_di" bpmnElement="ShootTask">
+        <dc:Bounds x="370" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0dmx6mn_di" bpmnElement="Gateway_0gwsn9f">
+        <dc:Bounds x="265" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_01998ai_di" bpmnElement="Gateway_0wfkflq">
+        <dc:Bounds x="525" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0amq46f_di" bpmnElement="EnemyIsKilledTask">
+        <dc:Bounds x="630" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
